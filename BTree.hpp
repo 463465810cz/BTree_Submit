@@ -17,7 +17,7 @@ namespace sjtu {
         static const int M = 1000;
         static const int L = 200;
         static const int head_offset = 0;
-        const char BtreeName[20]="Bpt.sjtu";
+        const char BtreeName[100]="chenzheng.dat";
 
 
         struct FileHead
@@ -572,6 +572,26 @@ namespace sjtu {
                 fp_open = 1;
             }
             if (file_already_exists == 0) build_tree();
+        }
+
+        BTree(const BTree& other)
+        {
+            fp=fopen(BtreeName,"rb+");
+            head.leafhead=other.head.leafhead;
+            head.leaftail=other.head.leaftail;
+            head.root=other.head.root;
+            head.allsize=other.head.allsize;
+            head.FileEof=other.head.FileEof;
+        }
+        BTree& operator=(const BTree& other)
+        {
+            fp=fopen(BtreeName,"rb+");
+            head.leafhead=other.head.leafhead;
+            head.leaftail=other.head.leaftail;
+            head.root=other.head.root;
+            head.allsize=other.head.allsize;
+            head.FileEof=other.head.FileEof;
+            return *this;
         }
 
 
