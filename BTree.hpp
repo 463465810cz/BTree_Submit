@@ -17,7 +17,7 @@ namespace sjtu {
         static const int M = 1000;
         static const int L = 200;
         static const int head_offset = 0;
-        const char BtreeName[100]="chenzheng.dat";
+        const char BtreeName[20]="Bpt.sjtu";
 
 
         struct FileHead
@@ -210,6 +210,8 @@ namespace sjtu {
             else split_node(node);
         }
 
+
+
         void split_leaf(LeafNode &leaf,iterator &p,const Key &key)
         {
             LeafNode NewLeaf;
@@ -270,6 +272,7 @@ namespace sjtu {
             else split_leaf(leaf,p,key);
             return pair<iterator, OperationResult>(p,Success);
         }
+
 
         //递归找叶子节点
         off_t locate_leaf(const Key &key,off_t offset)
@@ -349,6 +352,9 @@ namespace sjtu {
                 else place++;
                 return p;
             }
+
+
+
             //前加
             iterator& operator++() {
                 if(*this==from->end())
@@ -372,6 +378,8 @@ namespace sjtu {
                 else place++;
                 return this;
             }
+
+
             //后减
             iterator operator--(int) {
                 iterator p=*this;
@@ -391,6 +399,7 @@ namespace sjtu {
                 else place--;
                 return p;
             }
+
             //前减
             iterator& operator--() {
 
@@ -480,6 +489,9 @@ namespace sjtu {
                 else place++;
                 return p;
             }
+
+
+
             //前加
             const_iterator& operator++() {
                 if(*this==from->end())
@@ -503,6 +515,8 @@ namespace sjtu {
                 else place++;
                 return this;
             }
+
+
             //后减
             const_iterator operator--(int) {
                 const_iterator p=*this;
@@ -522,6 +536,7 @@ namespace sjtu {
                 else place--;
                 return p;
             }
+
             //前减
             const_iterator& operator--() {
 
@@ -572,26 +587,6 @@ namespace sjtu {
                 fp_open = 1;
             }
             if (file_already_exists == 0) build_tree();
-        }
-
-        BTree(const BTree& other)
-        {
-            fp=fopen(BtreeName,"rb+");
-            head.leafhead=other.head.leafhead;
-            head.leaftail=other.head.leaftail;
-            head.root=other.head.root;
-            head.allsize=other.head.allsize;
-            head.FileEof=other.head.FileEof;
-        }
-        BTree& operator=(const BTree& other)
-        {
-            fp=fopen(BtreeName,"rb+");
-            head.leafhead=other.head.leafhead;
-            head.leaftail=other.head.leaftail;
-            head.root=other.head.root;
-            head.allsize=other.head.allsize;
-            head.FileEof=other.head.FileEof;
-            return *this;
         }
 
 
@@ -684,7 +679,7 @@ namespace sjtu {
             p=find(key);
             if(p==end()){throw "No Find";}
             readFile(&leaf,p.offset,1,size_leaf);
-            return leaf.data[p.pos].second;
+            return leaf.data[p.place].second;
         }
         /**
          * Returns the number of elements with key
@@ -738,3 +733,19 @@ namespace sjtu {
 
     };
 }  // namespace sjtu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
