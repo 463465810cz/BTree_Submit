@@ -650,7 +650,7 @@ namespace sjtu {
             p.from=this;p.offset=head.leaftail;p.place=tmp.curnum;
             return p;
         }
-        const_iterator cend() const
+        const_iterator cend() 
         {
             const_iterator p;
             LeafNode tmp;
